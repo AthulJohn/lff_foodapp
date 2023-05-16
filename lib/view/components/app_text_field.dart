@@ -14,7 +14,7 @@ class AppTextField extends StatelessWidget {
       decoration: InputDecoration(
           filled: true,
           fillColor: AppColors.secondaryColor,
-          border: OutlineInputBorder(
+          enabledBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(10),
               borderSide: const BorderSide(color: AppColors.borderColor)),
           focusedBorder: OutlineInputBorder(

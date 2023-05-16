@@ -38,3 +38,42 @@ class ContinueButton extends StatelessWidget {
             shape: const StadiumBorder()));
   }
 }
+
+class AppOutlineButton extends StatelessWidget {
+  const AppOutlineButton(
+      {super.key,
+      required this.onPressed,
+      this.text,
+      this.icon,
+      this.fontSize = 17});
+  final Function()? onPressed;
+  final String? text;
+  final IconData? icon;
+  final double fontSize;
+
+  @override
+  Widget build(BuildContext context) {
+    return OutlinedButton(
+        onPressed: onPressed,
+        child: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            if (text != null)
+              Text(
+                text!,
+                style: TextStyle(fontFamily: "Sunflower"),
+              ),
+            if (icon != null) Icon(icon!)
+          ],
+        ),
+        style: OutlinedButton.styleFrom(
+            backgroundColor: Colors.white,
+            foregroundColor: Colors.black,
+            padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 20),
+            textStyle: TextStyle(fontSize: fontSize),
+            side: const BorderSide(color: AppColors.primaryColor, width: 2),
+            shape: const RoundedRectangleBorder(
+              borderRadius: BorderRadius.all(Radius.circular(10)),
+            )));
+  }
+}

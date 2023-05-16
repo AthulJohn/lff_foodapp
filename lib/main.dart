@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:lff_foodapp/view/screens/sign_in_page.dart';
 
 import 'view/screens/otp_verify_page.dart';
+import 'view/screens/provider_details_page.dart';
 import 'view/screens/role_select_page.dart';
 
 void main() {
@@ -21,7 +22,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
         fontFamily: 'Sunflower',
       ),
-      home: const RoleSelectPage(),
+      home: const ProviderDetailsPage(),
     );
   }
 }
