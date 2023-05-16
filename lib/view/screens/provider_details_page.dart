@@ -62,19 +62,13 @@ class ProviderDetailsPage extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.stretch,
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    const Text("Enter your organization name"),
-                    SizedBox(
-                      height: 5,
-                    ),
-                    AppTextField(
-                      onChanged: (val) {},
-                      hintText: "Tasty Restaurant",
-                    ),
-                  ],
+                const Text("Enter your organization name"),
+                SizedBox(
+                  height: 5,
+                ),
+                AppTextField(
+                  onChanged: (val) {},
+                  hintText: "Tasty Restaurant",
                 ),
               ],
             ),
