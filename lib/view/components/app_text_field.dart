@@ -3,14 +3,17 @@ import 'package:flutter/material.dart';
 import '../../constants/appColors.dart';
 
 class AppTextField extends StatelessWidget {
-  const AppTextField({super.key, this.onChanged, this.hintText});
+  const AppTextField(
+      {super.key, this.onChanged, this.hintText, this.align = TextAlign.start});
   final void Function(String)? onChanged;
   final String? hintText;
+  final TextAlign align;
 
   @override
   Widget build(BuildContext context) {
     return TextField(
       onChanged: onChanged,
+      textAlign: align,
       decoration: InputDecoration(
           filled: true,
           fillColor: AppColors.secondaryColor,

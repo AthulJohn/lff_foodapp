@@ -6,6 +6,7 @@ import 'package:lff_foodapp/view/components/type_card.dart';
 
 import '../../constants/appColors.dart';
 import '../components/app_text_field.dart';
+import '../components/title_text.dart';
 
 class ProviderDetailsPage extends StatelessWidget {
   const ProviderDetailsPage({super.key});
@@ -23,24 +24,12 @@ class ProviderDetailsPage extends StatelessWidget {
         padding: const EdgeInsets.all(20),
         child: ListView(
           children: [
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: const [
-                Text(
-                  "Thank you for being a",
-                  style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-                ),
-                Text(
-                  "PROVIDER",
-                  style: TextStyle(
-                      fontSize: 28,
-                      fontWeight: FontWeight.bold,
-                      color: AppColors.primaryColor),
-                )
-              ],
+            const TitleText(
+              blackText: "Thank you for being a",
+              greenText: "PROVIDER",
+              size: 28,
             ),
-            SizedBox(
+            const SizedBox(
               height: 10,
             ),
             RichText(
@@ -55,7 +44,7 @@ class ProviderDetailsPage extends StatelessWidget {
               ],
               style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
             )),
-            SizedBox(
+            const SizedBox(
               height: 20,
             ),
             Column(
@@ -63,7 +52,7 @@ class ProviderDetailsPage extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 const Text("Enter your organization name"),
-                SizedBox(
+                const SizedBox(
                   height: 5,
                 ),
                 AppTextField(
@@ -72,7 +61,7 @@ class ProviderDetailsPage extends StatelessWidget {
                 ),
               ],
             ),
-            SizedBox(
+            const SizedBox(
               height: 10,
             ),
             Column(
@@ -80,13 +69,13 @@ class ProviderDetailsPage extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 const Text("Select your organization type"),
-                SizedBox(
+                const SizedBox(
                   height: 5,
                 ),
                 SizedBox(
                   height: 100,
                   child: Row(
-                    children: [
+                    children: const [
                       Expanded(
                         child: TypeCard(
                           isHorizontal: false,
@@ -109,10 +98,10 @@ class ProviderDetailsPage extends StatelessWidget {
                     ],
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 10,
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 60,
                   child: TypeCard(
                     isHorizontal: true,
@@ -123,7 +112,7 @@ class ProviderDetailsPage extends StatelessWidget {
                 ),
               ],
             ),
-            SizedBox(
+            const SizedBox(
               height: 10,
             ),
             Column(
@@ -131,7 +120,7 @@ class ProviderDetailsPage extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 const Text("Select your pickup location"),
-                SizedBox(
+                const SizedBox(
                   height: 5,
                 ),
                 AppOutlineButton(
@@ -140,7 +129,7 @@ class ProviderDetailsPage extends StatelessWidget {
                 )
               ],
             ),
-            SizedBox(
+            const SizedBox(
               height: 20,
             ),
             ContinueButton(

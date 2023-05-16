@@ -4,6 +4,7 @@ import 'package:lff_foodapp/view/components/proceed_button.dart';
 import 'package:lff_foodapp/view/components/role_card.dart';
 
 import '../../constants/appColors.dart';
+import '../components/title_text.dart';
 
 class RoleSelectPage extends StatelessWidget {
   const RoleSelectPage({super.key});
@@ -22,24 +23,12 @@ class RoleSelectPage extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-            Expanded(
+            const Expanded(
               flex: 1,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: const [
-                  Text(
-                    "Let's get",
-                    style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
-                  ),
-                  Text(
-                    "STARTED",
-                    style: TextStyle(
-                        fontSize: 40,
-                        fontWeight: FontWeight.bold,
-                        color: AppColors.primaryColor),
-                  )
-                ],
+              child: TitleText(
+                blackText: "Let's get",
+                greenText: "STARTED",
+                size: 40,
               ),
             ),
             Expanded(

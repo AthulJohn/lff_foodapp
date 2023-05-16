@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:lff_foodapp/view/screens/order_food.dart';
 import 'package:lff_foodapp/view/screens/sign_in_page.dart';
 
 import 'view/screens/otp_verify_page.dart';
@@ -23,7 +24,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
         fontFamily: 'Sunflower',
       ),
-      home: const ProviderAddnDetailsPage(),
+      home: const OrderFoodPage(),
     );
   }
 }

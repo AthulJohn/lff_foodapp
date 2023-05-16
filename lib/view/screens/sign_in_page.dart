@@ -3,6 +3,7 @@ import 'package:lff_foodapp/view/components/phone_field.dart';
 import 'package:lff_foodapp/view/components/proceed_button.dart';
 
 import '../../constants/appColors.dart';
+import '../components/title_text.dart';
 
 class SignInPage extends StatelessWidget {
   const SignInPage({super.key});
@@ -21,36 +22,23 @@ class SignInPage extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-            Expanded(
+            const Expanded(
               flex: 2,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: const [
-                  Text(
-                    "Let's get",
-                    style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
-                  ),
-                  Text(
-                    "STARTED",
-                    style: TextStyle(
-                        fontSize: 40,
-                        fontWeight: FontWeight.bold,
-                        color: AppColors.primaryColor),
-                  )
-                ],
+              child: TitleText(
+                blackText: "Let's get",
+                greenText: "STARTED",
+                size: 40,
               ),
             ),
             Expanded(
               child: Center(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
+                  children: const [
                     Text("Enter your phone number"),
                     SizedBox(
                       height: 10,
                     ),
-                    //TODO: Add PhoneTextField here
                     PhoneField()
                   ],
                 ),
@@ -65,7 +53,7 @@ class SignInPage extends StatelessWidget {
                 ),
               ),
             ),
-            Spacer(
+            const Spacer(
               flex: 4,
             )
           ],

@@ -9,11 +9,12 @@ class ContinueButton extends StatelessWidget {
       required this.onPressed,
       this.text,
       this.icon,
-      this.fontSize = 17});
+      this.fontSize = 17,
+      this.padding = 30});
   final Function()? onPressed;
   final String? text;
   final IconData? icon;
-  final double fontSize;
+  final double fontSize, padding;
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +34,8 @@ class ContinueButton extends StatelessWidget {
         style: ElevatedButton.styleFrom(
             backgroundColor: AppColors.primaryColor,
             foregroundColor: Colors.white,
-            padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 20),
+            padding: EdgeInsets.symmetric(
+                horizontal: padding, vertical: (2 / 3) * padding),
             textStyle: TextStyle(fontSize: fontSize),
             shape: const StadiumBorder()));
   }
