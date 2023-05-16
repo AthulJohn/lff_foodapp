@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:lff_foodapp/view/components/phone_field.dart';
 import 'package:lff_foodapp/view/components/proceed_button.dart';
+import 'package:lff_foodapp/view/components/role_card.dart';
 
 import '../../constants/appColors.dart';
 
@@ -22,7 +23,7 @@ class RoleSelectPage extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
             Expanded(
-              flex: 2,
+              flex: 1,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -42,31 +43,34 @@ class RoleSelectPage extends StatelessWidget {
               ),
             ),
             Expanded(
+              flex: 3,
               child: Center(
                 child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    Text("Enter your phone number"),
-                    SizedBox(
-                      height: 10,
+                    const Text("I am a..."),
+                    const RoleCard(
+                      isCustomer: true,
+                      isSelected: true,
                     ),
-                    //TODO: Add PhoneTextField here
-                    PhoneField()
+                    const RoleCard(
+                      isCustomer: false,
+                      isSelected: true,
+                    ),
+                    Center(
+                      child: ContinueButton(
+                        onPressed: () {},
+                        text: "Continue",
+                        icon: Icons.arrow_forward,
+                      ),
+                    ),
                   ],
                 ),
               ),
             ),
-            Expanded(
-              child: Center(
-                child: ContinueButton(
-                  onPressed: () {},
-                  text: "Sent OTP",
-                  icon: Icons.arrow_forward,
-                ),
-              ),
-            ),
-            Spacer(
-              flex: 4,
+            const Spacer(
+              flex: 3,
             )
           ],
         ),
