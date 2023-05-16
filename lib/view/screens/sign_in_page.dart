@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:lff_foodapp/view/components/phone_field.dart';
+import 'package:lff_foodapp/view/components/proceed_button.dart';
 
 import '../../constants/appColors.dart';
 
@@ -8,33 +10,66 @@ class SignInPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: Padding(
-      padding: const EdgeInsets.all(20),
-      child: Column(
-        children: [
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: const [
-              Text(
-                "Let's Fight for",
-                style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
+        body: Container(
+      decoration: const BoxDecoration(
+          image: DecorationImage(
+              image: AssetImage("assets/images/Graphics.png"),
+              fit: BoxFit.cover)),
+      child: Padding(
+        padding: const EdgeInsets.all(20),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            Expanded(
+              flex: 2,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: const [
+                  Text(
+                    "Let's get",
+                    style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
+                  ),
+                  Text(
+                    "STARTED",
+                    style: TextStyle(
+                        fontSize: 40,
+                        fontWeight: FontWeight.bold,
+                        color: AppColors.primaryColor),
+                  )
+                ],
               ),
-              Text(
-                "FOOD",
-                style: TextStyle(
-                    fontSize: 40,
-                    fontWeight: FontWeight.bold,
-                    color: AppColors.primaryColor),
-              )
-            ],
-          ),
-          Column(
-            children: [
-              Text("Enter your phone number")
-              //TODO: Add PhoneTextField here
-            ],
-          )
-        ],
+            ),
+            Expanded(
+              child: Center(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text("Enter your phone number"),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    //TODO: Add PhoneTextField here
+                    PhoneField()
+                  ],
+                ),
+              ),
+            ),
+            Expanded(
+              child: Center(
+                child: ContinueButton(
+                  onPressed: () {},
+                  text: "Sent OTP",
+                  icon: Icons.arrow_forward,
+                ),
+              ),
+            ),
+            Spacer(
+              flex: 4,
+            )
+          ],
+        ),
       ),
     ));
   }

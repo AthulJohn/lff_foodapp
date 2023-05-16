@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:lff_foodapp/view/screens/sign_in_page.dart';
 
 void main() {
   runApp(const MyApp());
@@ -15,8 +16,9 @@ class MyApp extends StatelessWidget {
       title: "LFF- Let's Fight for Food",
       theme: ThemeData(
         primarySwatch: Colors.blue,
+        fontFamily: 'Sunflower',
       ),
-      home: const MyHomePage(),
+      home: const SignInPage(),
     );
   }
 }
