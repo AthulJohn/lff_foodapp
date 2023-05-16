@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:intl_phone_field/intl_phone_field.dart';
+import 'package:intl_phone_field/phone_number.dart';
 import 'package:lff_foodapp/constants/appColors.dart';
 
 class PhoneField extends StatelessWidget {
-  const PhoneField({super.key});
+  const PhoneField({super.key, this.onChanged});
+  final void Function(PhoneNumber)? onChanged;
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +29,7 @@ class PhoneField extends StatelessWidget {
               cursorColor: AppColors.primaryColor,
               initialCountryCode: 'IN',
               disableLengthCheck: true,
-              onChanged: (phone) {},
+              onChanged: onChanged,
             )
             // child: DropdownButton<String>(
             //   items: [

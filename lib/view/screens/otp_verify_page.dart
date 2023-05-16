@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:get/get.dart';
 import 'package:lff_foodapp/view/components/phone_field.dart';
 import 'package:lff_foodapp/view/components/proceed_button.dart';
 import 'package:lff_foodapp/view/components/title_text.dart';
@@ -6,6 +8,8 @@ import 'package:otp_text_field/otp_text_field.dart';
 import 'package:otp_text_field/style.dart';
 
 import '../../constants/appColors.dart';
+import '../../logic/getx_controllers/otp_controller.dart';
+import '../../navigation/routes.dart';
 
 class OTPVerifyPage extends StatelessWidget {
   const OTPVerifyPage({super.key});
@@ -54,7 +58,14 @@ class OTPVerifyPage extends StatelessWidget {
                       style: const TextStyle(fontSize: 17),
                       textFieldAlignment: MainAxisAlignment.spaceAround,
                       fieldStyle: FieldStyle.box,
-                      onCompleted: (pin) {},
+                      onCompleted: (pin) {
+                        int? value = int.tryParse(pin);
+                        if (value == null) {
+                          Get.snackbar("Invalid OTP",
+                              "You might have entered the wrong OTP. Please try again!");
+                        }
+                        Get.put(OTPController()).setOTP(value!);
+                      },
                       onChanged: (pin) {},
                     ),
                   ],
@@ -64,7 +75,9 @@ class OTPVerifyPage extends StatelessWidget {
             Expanded(
               child: Center(
                 child: ContinueButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Get.toNamed(Routes.userTypeSelection);
+                  },
                   text: "Confirm",
                   icon: Icons.arrow_forward,
                 ),

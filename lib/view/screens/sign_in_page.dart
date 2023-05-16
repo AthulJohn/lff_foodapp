@@ -1,8 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:lff_foodapp/data/getx_storage.dart';
+import 'package:lff_foodapp/logic/getx_controllers/user_controller.dart';
 import 'package:lff_foodapp/view/components/phone_field.dart';
 import 'package:lff_foodapp/view/components/proceed_button.dart';
 
 import '../../constants/appColors.dart';
+import '../../models/user_class.dart';
+import '../../navigation/routes.dart';
 import '../components/title_text.dart';
 
 class SignInPage extends StatelessWidget {
@@ -10,6 +15,8 @@ class SignInPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    GetXStorageManager.saveUserStatus("Visited");
+    Get.put(UserController());
     return Scaffold(
         body: Container(
       decoration: const BoxDecoration(
@@ -34,12 +41,17 @@ class SignInPage extends StatelessWidget {
               child: Center(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
-                  children: const [
-                    Text("Enter your phone number"),
-                    SizedBox(
+                  children: [
+                    const Text("Enter your phone number"),
+                    const SizedBox(
                       height: 10,
                     ),
-                    PhoneField()
+                    PhoneField(
+                      onChanged: (phone) {
+                        Get.find<UserController>()
+                            .setPhone(phone.completeNumber);
+                      },
+                    )
                   ],
                 ),
               ),
@@ -47,7 +59,12 @@ class SignInPage extends StatelessWidget {
             Expanded(
               child: Center(
                 child: ContinueButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    print(Get.find<UserController>().user.phone);
+                    Get.snackbar("OTP Sent",
+                        "OTP has been sent to your phone ${Get.find<UserController>().user.phone}");
+                    Get.toNamed(Routes.otpRoute);
+                  },
                   text: "Sent OTP",
                   icon: Icons.arrow_forward,
                 ),
