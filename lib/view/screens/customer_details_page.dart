@@ -1,22 +1,26 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:lff_foodapp/logic/getx_controllers/provider_controller.dart';
+import 'package:lff_foodapp/models/provider_class.dart';
 import 'package:lff_foodapp/view/components/phone_field.dart';
 import 'package:lff_foodapp/view/components/proceed_button.dart';
 import 'package:lff_foodapp/view/components/role_card.dart';
-import 'package:lff_foodapp/view/components/time_field.dart';
 import 'package:lff_foodapp/view/components/type_card.dart';
 
 import '../../constants/appColors.dart';
 import '../../data/getx_storage.dart';
-import '../../logic/getx_controllers/provider_controller.dart';
+import '../../logic/getx_controllers/customer_controller.dart';
+import '../../navigation/routes.dart';
 import '../components/app_text_field.dart';
+import '../components/title_text.dart';
 
-class ProviderAddnDetailsPage extends StatelessWidget {
-  const ProviderAddnDetailsPage({super.key});
+class CustomerDetailsPage extends StatelessWidget {
+  const CustomerDetailsPage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    ProviderController providerController = Get.find<ProviderController>();
+    GetXStorageManager.saveUserStatus(UserStatus.signedup);
+    CustomerController customerController = Get.find<CustomerController>();
     return Scaffold(
         body: Container(
       decoration: const BoxDecoration(
@@ -28,20 +32,23 @@ class ProviderAddnDetailsPage extends StatelessWidget {
         padding: const EdgeInsets.all(20),
         child: ListView(
           children: [
+            const TitleText(
+              blackText: "Thank you for being a",
+              greenText: "CUSTOMER",
+              size: 28,
+            ),
             const SizedBox(
               height: 10,
             ),
             RichText(
                 text: const TextSpan(
               children: [
-                TextSpan(text: "Let's "),
+                TextSpan(text: "Let's get you "),
                 TextSpan(
-                  text: "WRAP",
-                  style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      color: AppColors.primaryColor),
-                ),
-                TextSpan(text: " it up!"),
+                    text: "READY",
+                    style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        color: AppColors.primaryColor)),
               ],
               style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
             )),
@@ -52,15 +59,15 @@ class ProviderAddnDetailsPage extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.stretch,
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                const Text("Enter your contact number"),
+                const Text("Enter your name"),
                 const SizedBox(
                   height: 5,
                 ),
                 AppTextField(
                   onChanged: (val) {
-                    providerController.setContactNumber(val);
+                    customerController.setName(val);
                   },
-                  hintText: "Contact Number",
+                  hintText: "Name",
                 ),
               ],
             ),
@@ -71,33 +78,13 @@ class ProviderAddnDetailsPage extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.stretch,
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                const Text("Enter your secondary contact number (Optional)"),
+                const Text("Select your default location"),
                 const SizedBox(
                   height: 5,
                 ),
-                AppTextField(
-                  onChanged: (val) {
-                    providerController.setSecondaryNumber(val);
-                  },
-                  hintText: "Secondary Contact",
-                ),
-              ],
-            ),
-            const SizedBox(
-              height: 10,
-            ),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                const Text("Enter your default pickup time"),
-                const SizedBox(
-                  height: 5,
-                ),
-                TimeField(
-                  onChanged: (time) {
-                    providerController.setPickupTime(time);
-                  },
+                AppOutlineButton(
+                  onPressed: () {},
+                  text: "Select your Location",
                 )
               ],
             ),
@@ -108,7 +95,8 @@ class ProviderAddnDetailsPage extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.stretch,
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                const Text("Enter your default price per serve (in Rs.)"),
+                const Text(
+                    "Enter the maximum pickup distance that can be considered(in Kms)"),
                 const SizedBox(
                   height: 5,
                 ),
@@ -116,9 +104,9 @@ class ProviderAddnDetailsPage extends StatelessWidget {
                   onChanged: (val) {
                     double? value = double.tryParse(val);
                     if (value == null) return;
-                    providerController.setPricePerMeal(value);
+                    customerController.setMaxDistance(value);
                   },
-                  hintText: "50",
+                  hintText: "10",
                 ),
               ],
             ),
@@ -127,14 +115,9 @@ class ProviderAddnDetailsPage extends StatelessWidget {
             ),
             ContinueButton(
               onPressed: () {
-                print(
-                    "${providerController.provider.contactNumber} ${providerController.provider.secondaryNumber} ${providerController.provider.pickupTime} ${providerController.provider.pricePerMeal} ${providerController.provider.type} ${providerController.provider.name} ");
-
-                GetXStorageManager.saveUserStatus(UserStatus.registered);
-                Get.snackbar(
-                    'Done', 'You have succesfully signed up as a provider');
+                Get.toNamed(Routes.provideraddnDetails);
               },
-              text: "Continue",
+              text: "Get Started",
               icon: Icons.arrow_forward,
             )
           ],

@@ -6,6 +6,8 @@ import 'package:lff_foodapp/view/screens/provider_details_page.dart';
 import 'package:lff_foodapp/view/screens/role_select_page.dart';
 import 'package:lff_foodapp/view/screens/sign_in_page.dart';
 
+import '../view/screens/customer_details_page.dart';
+import '../view/screens/location_select_page.dart';
 import 'routes.dart';
 
 class AppPages {
@@ -37,6 +39,14 @@ class AppPages {
     GetPage(
       name: Routes.provideraddnDetails,
       page: () => const ProviderAddnDetailsPage(),
+    ),
+    GetPage(
+      name: Routes.customerDetails,
+      page: () => const CustomerDetailsPage(),
+    ),
+    GetPage(
+      name: Routes.locationSelector,
+      page: () => const LocationSelectorPage(),
     ),
   ];
 }

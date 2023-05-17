@@ -6,4 +6,5 @@ abstract class Routes {
   static const customerDetails = "/customerDetails";
   static const providerDetails = "/providerDetails";
   static const provideraddnDetails = "/provideraddnDetails";
+  static const locationSelector = "/locationSelector";
 }

@@ -15,7 +15,7 @@ class SignInPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    GetXStorageManager.saveUserStatus("Visited");
+    GetXStorageManager.saveUserStatus(UserStatus.onBoarded);
     Get.put(UserController());
     return Scaffold(
         body: Container(

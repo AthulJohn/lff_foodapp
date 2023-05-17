@@ -7,6 +7,7 @@ import 'package:lff_foodapp/view/components/proceed_button.dart';
 import 'package:lff_foodapp/view/components/role_card.dart';
 
 import '../../constants/appColors.dart';
+import '../../logic/getx_controllers/customer_controller.dart';
 import '../../models/user_class.dart';
 import '../../navigation/routes.dart';
 import '../components/title_text.dart';
@@ -71,8 +72,9 @@ class RoleSelectPage extends StatelessWidget {
                             User user = userController.user;
                             print(user.type);
                             if (user.type == UserType.customer) {
-                              Get.snackbar("Customer",
-                                  "Customer is not implemented yet");
+                              Get.put(CustomerController(user));
+
+                              Get.toNamed(Routes.customerDetails);
                             } else if (user.type == UserType.provider) {
                               Get.put(ProviderController(user));
 

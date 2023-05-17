@@ -2,12 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lff_foodapp/logic/getx_controllers/provider_controller.dart';
 import 'package:lff_foodapp/models/provider_class.dart';
+import 'package:lff_foodapp/view/components/location_card.dart';
 import 'package:lff_foodapp/view/components/phone_field.dart';
 import 'package:lff_foodapp/view/components/proceed_button.dart';
 import 'package:lff_foodapp/view/components/role_card.dart';
 import 'package:lff_foodapp/view/components/type_card.dart';
 
 import '../../constants/appColors.dart';
+import '../../data/getx_storage.dart';
 import '../../navigation/routes.dart';
 import '../components/app_text_field.dart';
 import '../components/title_text.dart';
@@ -17,6 +19,7 @@ class ProviderDetailsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    GetXStorageManager.saveUserStatus(UserStatus.signedup);
     ProviderController providerController = Get.find<ProviderController>();
     return Scaffold(
         body: Container(
@@ -132,20 +135,32 @@ class ProviderDetailsPage extends StatelessWidget {
             const SizedBox(
               height: 10,
             ),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                const Text("Select your pickup location"),
-                const SizedBox(
-                  height: 5,
-                ),
-                AppOutlineButton(
-                  onPressed: () {},
-                  text: "Select your Location",
-                )
-              ],
-            ),
+            GetBuilder<ProviderController>(builder: (controller) {
+              return providerController.locationIsSet
+                  ? LocationCard(
+                      hasMap: true,
+                      pLocation: providerController.provider.pLocation,
+                      onTap: () {
+                        Get.toNamed(Routes.locationSelector);
+                      },
+                    )
+                  : Column(
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        const Text("Select your pickup location"),
+                        const SizedBox(
+                          height: 5,
+                        ),
+                        AppOutlineButton(
+                          onPressed: () {
+                            Get.toNamed(Routes.locationSelector);
+                          },
+                          text: "Select your Location",
+                        )
+                      ],
+                    );
+            }),
             const SizedBox(
               height: 20,
             ),

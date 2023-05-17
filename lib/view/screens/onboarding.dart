@@ -12,7 +12,7 @@ class Onboarding extends StatelessWidget {
       body: Center(
           child: ContinueButton(
         onPressed: () {
-          Get.toNamed(Routes.signInRoute);
+          Get.offNamed(Routes.signInRoute);
         },
         text: "Continue",
       )),

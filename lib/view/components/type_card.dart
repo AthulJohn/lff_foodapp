@@ -50,7 +50,7 @@ class TypeCard extends StatelessWidget {
                   Expanded(
                     flex: 2,
                     child: Padding(
-                      padding: const EdgeInsets.all(4.0),
+                      padding: const EdgeInsets.all(8.0),
                       child: Image.asset(
                         'assets/images/$image',
                         fit: BoxFit.contain,
