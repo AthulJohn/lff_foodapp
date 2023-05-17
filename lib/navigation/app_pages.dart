@@ -1,6 +1,8 @@
 import 'package:get/get.dart';
 import 'package:lff_foodapp/view/screens/onboarding.dart';
 import 'package:lff_foodapp/view/screens/otp_verify_page.dart';
+import 'package:lff_foodapp/view/screens/provider_addn_details_page.dart';
+import 'package:lff_foodapp/view/screens/provider_details_page.dart';
 import 'package:lff_foodapp/view/screens/role_select_page.dart';
 import 'package:lff_foodapp/view/screens/sign_in_page.dart';
 
@@ -27,6 +29,14 @@ class AppPages {
     GetPage(
       name: Routes.userTypeSelection,
       page: () => const RoleSelectPage(),
+    ),
+    GetPage(
+      name: Routes.providerDetails,
+      page: () => const ProviderDetailsPage(),
+    ),
+    GetPage(
+      name: Routes.provideraddnDetails,
+      page: () => const ProviderAddnDetailsPage(),
     ),
   ];
 }

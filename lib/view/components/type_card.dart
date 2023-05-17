@@ -8,21 +8,24 @@ class TypeCard extends StatelessWidget {
       this.isHorizontal = false,
       this.isSelected = false,
       this.image = 'SpoonFork.png',
-      this.title = ''});
+      this.title = '',
+      this.onTap});
   final bool isHorizontal, isSelected;
   final String image, title;
+  final VoidCallback? onTap;
 
   @override
   Widget build(BuildContext context) {
     return Container(
-        decoration: BoxDecoration(
-          color: AppColors.secondaryColor,
-          borderRadius: BorderRadius.circular(10),
-          border: Border.all(
-              color:
-                  isSelected ? AppColors.primaryColor : AppColors.borderColor,
-              width: isSelected ? 2 : 1),
-        ),
+      decoration: BoxDecoration(
+        color: AppColors.secondaryColor,
+        borderRadius: BorderRadius.circular(10),
+        border: Border.all(
+            color: isSelected ? AppColors.primaryColor : AppColors.borderColor,
+            width: isSelected ? 2 : 1),
+      ),
+      child: InkWell(
+        onTap: onTap,
         child: isHorizontal
             ? Row(
                 children: [
@@ -62,6 +65,8 @@ class TypeCard extends StatelessWidget {
                     ),
                   )),
                 ],
-              ));
+              ),
+      ),
+    );
   }
 }

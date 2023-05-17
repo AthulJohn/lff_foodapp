@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:lff_foodapp/view/components/phone_field.dart';
 import 'package:lff_foodapp/view/components/proceed_button.dart';
 import 'package:lff_foodapp/view/components/role_card.dart';
@@ -6,6 +7,7 @@ import 'package:lff_foodapp/view/components/time_field.dart';
 import 'package:lff_foodapp/view/components/type_card.dart';
 
 import '../../constants/appColors.dart';
+import '../../logic/getx_controllers/provider_controller.dart';
 import '../components/app_text_field.dart';
 
 class ProviderAddnDetailsPage extends StatelessWidget {
@@ -13,6 +15,7 @@ class ProviderAddnDetailsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    ProviderController providerController = Get.find<ProviderController>();
     return Scaffold(
         body: Container(
       decoration: const BoxDecoration(
@@ -53,7 +56,9 @@ class ProviderAddnDetailsPage extends StatelessWidget {
                   height: 5,
                 ),
                 AppTextField(
-                  onChanged: (val) {},
+                  onChanged: (val) {
+                    providerController.setContactNumber(val);
+                  },
                   hintText: "Contact Number",
                 ),
               ],
@@ -70,7 +75,9 @@ class ProviderAddnDetailsPage extends StatelessWidget {
                   height: 5,
                 ),
                 AppTextField(
-                  onChanged: (val) {},
+                  onChanged: (val) {
+                    providerController.setSecondaryNumber(val);
+                  },
                   hintText: "Secondary Contact",
                 ),
               ],
@@ -86,7 +93,11 @@ class ProviderAddnDetailsPage extends StatelessWidget {
                 SizedBox(
                   height: 5,
                 ),
-                TimeField()
+                TimeField(
+                  onChanged: (time) {
+                    providerController.setPickupTime(time);
+                  },
+                )
               ],
             ),
             SizedBox(
@@ -101,7 +112,11 @@ class ProviderAddnDetailsPage extends StatelessWidget {
                   height: 5,
                 ),
                 AppTextField(
-                  onChanged: (val) {},
+                  onChanged: (val) {
+                    double? value = double.tryParse(val);
+                    if (value == null) return;
+                    providerController.setPricePerMeal(value);
+                  },
                   hintText: "50",
                 ),
               ],
@@ -110,7 +125,13 @@ class ProviderAddnDetailsPage extends StatelessWidget {
               height: 20,
             ),
             ContinueButton(
-              onPressed: () {},
+              onPressed: () {
+                print(
+                    "${providerController.provider.contactNumber} ${providerController.provider.secondaryNumber} ${providerController.provider.pickupTime} ${providerController.provider.pricePerMeal} ${providerController.provider.type} ${providerController.provider.name} ");
+
+                Get.snackbar(
+                    'Done', 'You have succesfully signed up as a provider');
+              },
               text: "Continue",
               icon: Icons.arrow_forward,
             )

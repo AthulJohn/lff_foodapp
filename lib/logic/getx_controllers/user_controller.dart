@@ -4,13 +4,14 @@ import '../../models/user_class.dart';
 
 class UserController extends GetxController {
   UserController();
-  User user = User(phone: "".obs);
+  User user = User(phone: "");
 
   void setPhone(String phone) {
-    user.phone.value = phone;
+    user.phone = phone;
   }
 
   void setType(UserType type) {
-    user.type!.value = type;
+    user.type = type;
+    update();
   }
 }

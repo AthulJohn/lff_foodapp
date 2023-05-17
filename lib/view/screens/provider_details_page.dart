@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:lff_foodapp/logic/getx_controllers/provider_controller.dart';
+import 'package:lff_foodapp/models/provider_class.dart';
 import 'package:lff_foodapp/view/components/phone_field.dart';
 import 'package:lff_foodapp/view/components/proceed_button.dart';
 import 'package:lff_foodapp/view/components/role_card.dart';
 import 'package:lff_foodapp/view/components/type_card.dart';
 
 import '../../constants/appColors.dart';
+import '../../navigation/routes.dart';
 import '../components/app_text_field.dart';
 import '../components/title_text.dart';
 
@@ -13,6 +17,7 @@ class ProviderDetailsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    ProviderController providerController = Get.find<ProviderController>();
     return Scaffold(
         body: Container(
       decoration: const BoxDecoration(
@@ -56,7 +61,9 @@ class ProviderDetailsPage extends StatelessWidget {
                   height: 5,
                 ),
                 AppTextField(
-                  onChanged: (val) {},
+                  onChanged: (val) {
+                    providerController.setName(val);
+                  },
                   hintText: "Tasty Restaurant",
                 ),
               ],
@@ -64,54 +71,64 @@ class ProviderDetailsPage extends StatelessWidget {
             const SizedBox(
               height: 10,
             ),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                const Text("Select your organization type"),
-                const SizedBox(
-                  height: 5,
-                ),
-                SizedBox(
-                  height: 100,
-                  child: Row(
-                    children: const [
-                      Expanded(
-                        child: TypeCard(
-                          isHorizontal: false,
-                          isSelected: true,
-                          image: 'Restaurant.png',
-                          title: 'Restaurant',
-                        ),
-                      ),
-                      SizedBox(
-                        width: 10,
-                      ),
-                      Expanded(
-                        child: TypeCard(
-                          isHorizontal: false,
-                          isSelected: false,
-                          image: 'Catering.png',
-                          title: 'Catering',
-                        ),
-                      ),
-                    ],
+            GetBuilder<ProviderController>(builder: (controller) {
+              return Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  const Text("Select your organization type"),
+                  const SizedBox(
+                    height: 5,
                   ),
-                ),
-                const SizedBox(
-                  height: 10,
-                ),
-                const SizedBox(
-                  height: 60,
-                  child: TypeCard(
-                    isHorizontal: true,
-                    isSelected: false,
-                    image: 'SpoonFork.png',
-                    title: 'Others',
+                  SizedBox(
+                    height: 100,
+                    child: Row(
+                      children: [
+                        Expanded(
+                          child: TypeCard(
+                            isHorizontal: false,
+                            isSelected: controller.provider.orgType ==
+                                OrgType.restaurant,
+                            image: 'Restaurant.png',
+                            title: 'Restaurant',
+                            onTap: () =>
+                                controller.setOrgType(OrgType.restaurant),
+                          ),
+                        ),
+                        const SizedBox(
+                          width: 10,
+                        ),
+                        Expanded(
+                          child: TypeCard(
+                            isHorizontal: false,
+                            isSelected:
+                                controller.provider.orgType == OrgType.catering,
+                            image: 'Catering.png',
+                            title: 'Catering',
+                            onTap: () =>
+                                providerController.setOrgType(OrgType.catering),
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
-                ),
-              ],
-            ),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  SizedBox(
+                    height: 60,
+                    child: TypeCard(
+                      isHorizontal: true,
+                      isSelected: controller.provider.orgType == OrgType.others,
+                      image: 'SpoonFork.png',
+                      title: 'Others',
+                      onTap: () =>
+                          providerController.setOrgType(OrgType.others),
+                    ),
+                  ),
+                ],
+              );
+            }),
             const SizedBox(
               height: 10,
             ),
@@ -133,7 +150,9 @@ class ProviderDetailsPage extends StatelessWidget {
               height: 20,
             ),
             ContinueButton(
-              onPressed: () {},
+              onPressed: () {
+                Get.toNamed(Routes.provideraddnDetails);
+              },
               text: "Continue",
               icon: Icons.arrow_forward,
             )

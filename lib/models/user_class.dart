@@ -3,8 +3,9 @@ import 'package:get/get.dart';
 enum UserType { provider, customer }
 
 class User {
-  RxString phone = "".obs;
-  Rx<UserType>? type;
+  String phone = "";
+  UserType? type;
 
+  User.withNoType({required this.phone});
   User({required this.phone, this.type});
 }
