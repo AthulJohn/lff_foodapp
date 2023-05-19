@@ -47,14 +47,11 @@ class CounterField extends StatelessWidget {
             Image.asset(
               "assets/svg_assets/counterfield.png",
               width: 50,
-              height: 50,
             ),
-            Obx(
-               () {
-                return Text(c.count.value.toString(),
-                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold));
-              }
-            ),
+            Obx(() {
+              return Text(c.count.value.toString(),
+                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold));
+            }),
           ],
         ),
         IconButton(
@@ -75,11 +72,11 @@ class foodPreference extends StatelessWidget {
   Widget build(BuildContext context) {
     final Controller c = Get.put(Controller());
     BoxDecoration b = const BoxDecoration(
-    boxShadow: <BoxShadow>[
-      BoxShadow(
-          color: Colors.black54, blurRadius: 15.0, offset: Offset(0.0, 0.75))
-    ],
-  );
+      boxShadow: <BoxShadow>[
+        BoxShadow(
+            color: Colors.black54, blurRadius: 15.0, offset: Offset(0.0, 0.75))
+      ],
+    );
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
@@ -87,34 +84,29 @@ class foodPreference extends StatelessWidget {
           onTap: () {
             c.selectVeg();
           },
-          child: Obx(
-             () {
-              return Container(
-                decoration: c.select.value == 0 ? b : null,
-                child: Image.asset(
-                  "assets/svg_assets/veg.png",
-                  width: 125,
-                ),
-              );
-            }
-          ),
+          child: Obx(() {
+            return Container(
+              decoration: c.select.value == 0 ? b : null,
+              child: Image.asset(
+                "assets/svg_assets/veg.png",
+                width: 125,
+              ),
+            );
+          }),
         ),
         InkWell(
           onTap: () {
             c.selectNonVeg();
-            
           },
-          child: Obx(
-             () {
-              return Container(
-                decoration: c.select.value == 1 ? b : null,
-                child: Image.asset(
-                  "assets/svg_assets/nonveg.png",
-                  width: 125,
-                ),
-              );
-            }
-          ),
+          child: Obx(() {
+            return Container(
+              decoration: c.select.value == 1 ? b : null,
+              child: Image.asset(
+                "assets/svg_assets/nonveg.png",
+                width: 125,
+              ),
+            );
+          }),
         )
       ],
     );
@@ -158,18 +150,16 @@ class FinaliseOrder extends StatelessWidget {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-            Obx(
-               () {
-                return Text(
-                  c.select.value==0?"Veg":"Non-Veg",
-                  style: TextStyle(
-                    color: Color(0xff01D38A),
-                    fontSize: 26,
-                    fontWeight: FontWeight.bold,
-                  ),
-                );
-              }
-            ),
+            Obx(() {
+              return Text(
+                c.select.value == 0 ? "Veg" : "Non-Veg",
+                style: TextStyle(
+                  color: Color(0xff01D38A),
+                  fontSize: 26,
+                  fontWeight: FontWeight.bold,
+                ),
+              );
+            }),
             Text(
               "Meals for",
               style: TextStyle(
@@ -178,18 +168,16 @@ class FinaliseOrder extends StatelessWidget {
                 fontWeight: FontWeight.bold,
               ),
             ),
-            Obx(
-               () {
-                return Text(
-                  c.count.value.toString(),
-                  style: TextStyle(
-                    color: Color(0xff01D38A),
-                    fontSize: 26,
-                    fontWeight: FontWeight.bold,
-                  ),
-                );
-              }
-            ),
+            Obx(() {
+              return Text(
+                c.count.value.toString(),
+                style: TextStyle(
+                  color: Color(0xff01D38A),
+                  fontSize: 26,
+                  fontWeight: FontWeight.bold,
+                ),
+              );
+            }),
             Text(
               "Serves",
               style: TextStyle(

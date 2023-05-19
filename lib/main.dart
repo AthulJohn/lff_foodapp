@@ -2,20 +2,20 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lff_foodapp/navigation/app_pages.dart';
 import 'package:lff_foodapp/navigation/routes.dart';
-import 'package:lff_foodapp/view/screens/order_food.dart';
-import 'package:lff_foodapp/view/screens/sign_in_page.dart';
-import 'package:lff_foodapp/view/screens/homecustomer.dart';
-import 'package:lff_foodapp/view/screens/orderconfirm.dart';
-import 'package:lff_foodapp/view/screens/orderpage.dart';
+import 'package:lff_foodapp/view/screens/customer_pages/order_food.dart';
+import 'package:lff_foodapp/view/screens/auth/sign_in_page.dart';
+import 'package:lff_foodapp/view/screens/customer_pages/homecustomer.dart';
+import 'package:lff_foodapp/view/screens/customer_pages/orderconfirm.dart';
+import 'package:lff_foodapp/view/screens/customer_pages/orderpage.dart';
 
-import 'view/screens/homeprovider.dart';
+import 'view/screens/provider_pages/homeprovider.dart';
 
 import 'data/getx_storage.dart';
-import 'view/screens/location_select_page.dart';
-import 'view/screens/otp_verify_page.dart';
-import 'view/screens/provider_addn_details_page.dart';
-import 'view/screens/provider_details_page.dart';
-import 'view/screens/role_select_page.dart';
+import 'view/screens/registration/location_select_page.dart';
+import 'view/screens/auth/otp_verify_page.dart';
+import 'view/screens/registration/provider_addn_details_page.dart';
+import 'view/screens/registration/provider_details_page.dart';
+import 'view/screens/registration/role_select_page.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -30,12 +30,13 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
+      // showSemanticsDebugger: true,
       title: "LFF- Let's Fight for Food",
       theme: ThemeData(
         primarySwatch: Colors.blue,
         fontFamily: 'Sunflower',
       ),
-      // home: const LocationSelectorPage(),
+      // home: const HomeCustomer(),
       initialRoute: '/',
       getPages: AppPages.routes,
     );
@@ -52,8 +53,6 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
-    return OrderConfirm(veg:0,serves:0);
+    return OrderConfirm(veg: 0, serves: 0);
   }
 }
-
-

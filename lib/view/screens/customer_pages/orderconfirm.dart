@@ -3,7 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../components/orderwidgets.dart';
+import '../../components/orderwidgets.dart';
 
 class OrderConfirm extends StatelessWidget {
   final int veg;

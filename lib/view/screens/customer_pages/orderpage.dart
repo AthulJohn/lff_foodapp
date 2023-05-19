@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 
-import '../../constants/graphics.dart';
-import '../components/orderwidgets.dart';
+import '../../../constants/graphics.dart';
+import '../../components/orderwidgets.dart';
 import 'package:get/get.dart';
 
 import 'orderconfirm.dart';
-int flag=0;
+
+int flag = 0;
 List<Step> steps = [
   const Step(
     title: Text('Specify the number of serves needed'),
@@ -122,11 +123,11 @@ class MakeOrderState extends State<MakeOrder> {
             if (currentStep < steps.length - 1) {
               currentStep = currentStep + 1;
             } else {
-              flag=1;
+              flag = 1;
             }
           });
-          if(flag==1){
-            Get.to(OrderConfirm(veg:c.select.value,serves:c.count.value));
+          if (flag == 1) {
+            Get.to(OrderConfirm(veg: c.select.value, serves: c.count.value));
           }
         },
         onStepCancel: () {
