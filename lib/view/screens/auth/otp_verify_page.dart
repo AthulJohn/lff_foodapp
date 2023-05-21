@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
+import 'package:lff_foodapp/logic/getx_controllers/user_controller.dart';
 import 'package:lff_foodapp/view/components/text_fields/phone_field.dart';
 import 'package:lff_foodapp/view/components/buttons/proceed_button.dart';
 import 'package:lff_foodapp/view/components/title_text.dart';
+import 'package:lff_foodapp/view/screens/auth/sign_in_page.dart';
 import 'package:otp_text_field/otp_text_field.dart';
 import 'package:otp_text_field/style.dart';
+import 'package:http/http.dart' as http;
+import 'package:supabase_flutter/supabase_flutter.dart';
 
 import '../../../constants/appColors.dart';
 import '../../../logic/getx_controllers/otp_controller.dart';
@@ -16,6 +20,7 @@ class OTPVerifyPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final supabase = Supabase.instance.client;
     return Scaffold(
         body: Container(
       decoration: const BoxDecoration(
@@ -75,7 +80,14 @@ class OTPVerifyPage extends StatelessWidget {
             Expanded(
               child: Center(
                 child: ContinueButton(
-                  onPressed: () {
+                  onPressed: () async {
+                    int otp = Get.find<OTPController>().otp.value;
+                    final AuthResponse res = await supabase.auth.verifyOTP(
+                      phone: Get.find<UserController>().user.phone,
+                      token: "$otp",
+                      type: OtpType.sms,
+                    );
+                    print(res.session?.accessToken);
                     Get.toNamed(Routes.userTypeSelection);
                   },
                   text: "Confirm",

@@ -4,17 +4,28 @@ import 'package:lff_foodapp/data/getx_storage.dart';
 import 'package:lff_foodapp/logic/getx_controllers/user_controller.dart';
 import 'package:lff_foodapp/view/components/text_fields/phone_field.dart';
 import 'package:lff_foodapp/view/components/buttons/proceed_button.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 
 import '../../../constants/appColors.dart';
 import '../../../models/user_class.dart';
 import '../../../navigation/routes.dart';
 import '../../components/title_text.dart';
 
+/*
+curl -X POST 'https://cvwawazfelidkloqmbma.supabase.co/auth/v1/otp' \
+-H "apikey: SUPABASE_KEY" \
+-H "Content-Type: application/json" \
+-d '{
+  "phone": "+13334445555"
+}'
+*/
+
 class SignInPage extends StatelessWidget {
   const SignInPage({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final supabase = Supabase.instance.client;
     GetXStorageManager.saveUserStatus(UserStatus.onBoarded);
     Get.put(UserController());
     return Scaffold(
@@ -59,11 +70,17 @@ class SignInPage extends StatelessWidget {
             Expanded(
               child: Center(
                 child: ContinueButton(
-                  onPressed: () {
-                    print(Get.find<UserController>().user.phone);
-                    Get.snackbar("OTP Sent",
-                        "OTP has been sent to your phone ${Get.find<UserController>().user.phone}");
-                    Get.toNamed(Routes.otpRoute);
+                  onPressed: () async {
+                    // print(Get.find<UserController>().user.phone);
+                    String phone = Get.find<UserController>().user.phone;
+                    await supabase.auth.signInWithOtp(
+                      phone:  phone,
+                    );
+                    
+                      Get.snackbar("OTP Sent",
+                          "OTP has been sent to your phone $phone");
+                      Get.toNamed(Routes.otpRoute);
+                    
                   },
                   text: "Sent OTP",
                   icon: Icons.arrow_forward,
