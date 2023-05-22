@@ -9,13 +9,16 @@ class Onboarding extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-          child: ContinueButton(
-        onPressed: () {
+        body: GestureDetector(
+      child: Image.asset(
+        "assets/svg_assets/onboarding.png",
+        fit: BoxFit.fill,
+      ),
+      onVerticalDragUpdate: (details) {
+        if (details.delta.dy < -8) {
           Get.offNamed(Routes.signInRoute);
-        },
-        text: "Continue",
-      )),
-    );
+        }
+      },
+    ));
   }
 }
