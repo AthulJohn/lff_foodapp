@@ -1,3 +1,5 @@
+import 'package:latlong2/latlong.dart';
+
 enum OrderType { veg, nonVeg, vegan }
 
 enum OrderStatus { booked, pickedUp, cancelled }
@@ -8,6 +10,7 @@ class Order {
   OrderType orderType;
   DateTime orderTime;
   int serveCount;
+  LatLng location = LatLng(0, 0);
 
   Order(
       {required this.customerName,

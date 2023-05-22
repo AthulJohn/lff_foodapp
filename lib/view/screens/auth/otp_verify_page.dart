@@ -21,6 +21,7 @@ class OTPVerifyPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final supabase = Supabase.instance.client;
+    OTPController controller = Get.put(OTPController());
     return Scaffold(
         body: Container(
       decoration: const BoxDecoration(
@@ -69,7 +70,7 @@ class OTPVerifyPage extends StatelessWidget {
                           Get.snackbar("Invalid OTP",
                               "You might have entered the wrong OTP. Please try again!");
                         }
-                        Get.put(OTPController()).setOTP(value!);
+                        controller.setOTP(value!);
                       },
                       onChanged: (pin) {},
                     ),
@@ -79,24 +80,49 @@ class OTPVerifyPage extends StatelessWidget {
             ),
             Expanded(
               child: Center(
-                child: ContinueButton(
+                child: controller.isLoading.value
+                    ? CircularProgressIndicator(
+                        color: AppColors.primaryColor,
+                      )
+                    : ContinueButton(
+                        onPressed: () async {
+                          int otp = controller.otp.value;
+                          controller.load();
+                          try {
+                            final AuthResponse res =
+                                await supabase.auth.verifyOTP(
+                              phone: Get.find<UserController>().user.phone,
+                              token: "$otp",
+                              type: OtpType.sms,
+                            );
+
+                            print(res.session?.accessToken);
+                          } catch (e) {
+                            print(e.toString());
+                          }
+                          Get.toNamed(Routes.userTypeSelection);
+                        },
+                        text: "Confirm",
+                        icon: Icons.arrow_forward,
+                      ),
+              ),
+            ),
+            Center(
+              child: SizedBox(
+                height: 30,
+                child: AppOutlineButton(
                   onPressed: () async {
-                    int otp = Get.find<OTPController>().otp.value;
-                    final AuthResponse res = await supabase.auth.verifyOTP(
-                      phone: Get.find<UserController>().user.phone,
-                      token: "$otp",
-                      type: OtpType.sms,
-                    );
-                    print(res.session?.accessToken);
-                    Get.toNamed(Routes.userTypeSelection);
+                    Get.snackbar(
+                        "Message not sent", "Continue with any 6 digit code");
                   },
-                  text: "Confirm",
-                  icon: Icons.arrow_forward,
+                  text: "Resend OTP",
+                  padding: 10,
+                  fontSize: 12,
                 ),
               ),
             ),
             const Spacer(
-              flex: 4,
+              flex: 3,
             )
           ],
         ),

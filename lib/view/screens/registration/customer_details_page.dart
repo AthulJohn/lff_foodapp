@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lff_foodapp/logic/getx_controllers/provider_controller.dart';
 import 'package:lff_foodapp/models/provider_class.dart';
+import 'package:lff_foodapp/models/user_class.dart';
 import 'package:lff_foodapp/view/components/text_fields/phone_field.dart';
 import 'package:lff_foodapp/view/components/buttons/proceed_button.dart';
 import 'package:lff_foodapp/view/components/cards/role_card.dart';
@@ -11,6 +12,7 @@ import '../../../constants/appColors.dart';
 import '../../../data/getx_storage.dart';
 import '../../../logic/getx_controllers/customer_controller.dart';
 import '../../../navigation/routes.dart';
+import '../../components/cards/location_card.dart';
 import '../../components/text_fields/app_text_field.dart';
 import '../../components/title_text.dart';
 
@@ -78,20 +80,33 @@ class CustomerDetailsPage extends StatelessWidget {
             const SizedBox(
               height: 10,
             ),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                const Text("Select your default location"),
-                const SizedBox(
-                  height: 5,
-                ),
-                AppOutlineButton(
-                  onPressed: () {},
-                  text: "Select your Location",
-                )
-              ],
-            ),
+            GetBuilder<CustomerController>(builder: (controller) {
+              return customerController.locationIsSet
+                  ? LocationCard(
+                      hasMap: true,
+                      pLocation: customerController.customer.location,
+                      onTap: () {
+                        Get.toNamed(Routes.locationSelector);
+                      },
+                    )
+                  : Column(
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        const Text("Select your default location"),
+                        const SizedBox(
+                          height: 5,
+                        ),
+                        AppOutlineButton(
+                          onPressed: () {
+                            Get.toNamed(Routes.locationSelector,
+                                arguments: {"type": UserType.customer});
+                          },
+                          text: "Select your Location",
+                        )
+                      ],
+                    );
+            }),
             const SizedBox(
               height: 10,
             ),

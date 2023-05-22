@@ -25,7 +25,6 @@ class SignInPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final supabase = Supabase.instance.client;
     GetXStorageManager.saveUserStatus(UserStatus.onBoarded);
     Get.put(UserController());
     return Scaffold(
@@ -69,22 +68,7 @@ class SignInPage extends StatelessWidget {
             ),
             Expanded(
               child: Center(
-                child: ContinueButton(
-                  onPressed: () async {
-                    // print(Get.find<UserController>().user.phone);
-                    String phone = Get.find<UserController>().user.phone;
-                    await supabase.auth.signInWithOtp(
-                      phone:  phone,
-                    );
-                    
-                      Get.snackbar("OTP Sent",
-                          "OTP has been sent to your phone $phone");
-                      Get.toNamed(Routes.otpRoute);
-                    
-                  },
-                  text: "Sent OTP",
-                  icon: Icons.arrow_forward,
-                ),
+                child: LoaderButton(),
               ),
             ),
             const Spacer(
@@ -94,5 +78,46 @@ class SignInPage extends StatelessWidget {
         ),
       ),
     ));
+  }
+}
+
+class LoaderButton extends StatefulWidget {
+  const LoaderButton({super.key});
+
+  @override
+  State<LoaderButton> createState() => _LoaderButtonState();
+}
+
+class _LoaderButtonState extends State<LoaderButton> {
+  bool isLoading = false;
+  @override
+  Widget build(BuildContext context) {
+    final supabase = Supabase.instance.client;
+    return isLoading
+        ? CircularProgressIndicator(
+            color: AppColors.primaryColor,
+          )
+        : ContinueButton(
+            onPressed: () async {
+              // print(Get.find<UserController>().user.phone);
+              setState(() {
+                isLoading = true;
+              });
+              String phone = "";
+              try {
+                phone = Get.find<UserController>().user.phone;
+                await supabase.auth.signInWithOtp(
+                  phone: phone,
+                );
+              } catch (e) {
+                print(e.toString());
+              }
+              Get.snackbar("OTP Not Sent",
+                  "Sorry, OTP verification not yet implemented. Enter any 6 digit code to continue.");
+              Get.toNamed(Routes.otpRoute);
+            },
+            text: "Sent OTP",
+            icon: Icons.arrow_forward,
+          );
   }
 }

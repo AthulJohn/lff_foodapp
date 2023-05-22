@@ -47,11 +47,13 @@ class AppOutlineButton extends StatelessWidget {
       required this.onPressed,
       this.text,
       this.icon,
-      this.fontSize = 17});
+      this.fontSize = 17,
+      this.padding = 30,
+      this.bradius = 10});
   final Function()? onPressed;
   final String? text;
   final IconData? icon;
-  final double fontSize;
+  final double fontSize, padding, bradius;
 
   @override
   Widget build(BuildContext context) {
@@ -71,11 +73,12 @@ class AppOutlineButton extends StatelessWidget {
         style: OutlinedButton.styleFrom(
             backgroundColor: Colors.white,
             foregroundColor: Colors.black,
-            padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 20),
+            padding: EdgeInsets.symmetric(
+                horizontal: padding, vertical: padding * (2 / 3)),
             textStyle: TextStyle(fontSize: fontSize),
             side: const BorderSide(color: AppColors.primaryColor, width: 2),
-            shape: const RoundedRectangleBorder(
-              borderRadius: BorderRadius.all(Radius.circular(10)),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.all(Radius.circular(bradius)),
             )));
   }
 }

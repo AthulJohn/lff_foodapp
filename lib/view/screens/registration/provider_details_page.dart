@@ -10,6 +10,7 @@ import 'package:lff_foodapp/view/components/cards/type_card.dart';
 
 import '../../../constants/appColors.dart';
 import '../../../data/getx_storage.dart';
+import '../../../models/user_class.dart';
 import '../../../navigation/routes.dart';
 import '../../components/text_fields/app_text_field.dart';
 import '../../components/title_text.dart';
@@ -154,7 +155,8 @@ class ProviderDetailsPage extends StatelessWidget {
                         ),
                         AppOutlineButton(
                           onPressed: () {
-                            Get.toNamed(Routes.locationSelector);
+                            Get.toNamed(Routes.locationSelector,
+                                arguments: {"type": UserType.provider});
                           },
                           text: "Select your Location",
                         )

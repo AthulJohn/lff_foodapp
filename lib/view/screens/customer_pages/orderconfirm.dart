@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:lff_foodapp/navigation/routes.dart';
 
 import '../../components/orderwidgets.dart';
 
@@ -193,7 +194,9 @@ class OrderConfirm extends StatelessWidget {
                   ),
                 ),
                 InkWell(
-                  onTap: () {},
+                  onTap: () {
+                    Get.offAllNamed(Routes.customerHome);
+                  },
                   child: Image.asset(
                     "assets/svg_assets/leave_button.png",
                     width: 150,

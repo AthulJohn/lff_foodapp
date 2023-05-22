@@ -12,6 +12,7 @@ import 'package:lff_foodapp/view/screens/registration/provider_details_page.dart
 import 'package:lff_foodapp/view/screens/registration/role_select_page.dart';
 import 'package:lff_foodapp/view/screens/auth/sign_in_page.dart';
 
+import '../view/screens/customer_pages/order_food.dart';
 import '../view/screens/registration/customer_details_page.dart';
 import '../view/screens/customer_pages/homecustomer.dart';
 import '../view/screens/registration/location_select_page.dart';

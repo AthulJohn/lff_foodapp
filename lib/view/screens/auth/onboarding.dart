@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lff_foodapp/navigation/routes.dart';
 import 'package:lff_foodapp/view/components/buttons/proceed_button.dart';
+import 'package:lff_foodapp/view/screens/auth/sign_in_page.dart';
 
 class Onboarding extends StatelessWidget {
   const Onboarding({super.key});
@@ -16,7 +17,10 @@ class Onboarding extends StatelessWidget {
       ),
       onVerticalDragUpdate: (details) {
         if (details.delta.dy < -8) {
-          Get.offNamed(Routes.signInRoute);
+          Get.off(
+            const SignInPage(),
+            transition: Transition.downToUp,
+          );
         }
       },
     ));
