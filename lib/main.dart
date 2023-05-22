@@ -35,6 +35,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
+      debugShowCheckedModeBanner: false,
       // showSemanticsDebugger: true,
       title: "LFF- Let's Fight for Food",
       theme: ThemeData(
